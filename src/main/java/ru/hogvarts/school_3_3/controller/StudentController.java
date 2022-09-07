@@ -2,8 +2,8 @@ package ru.hogvarts.school_3_3.controller;
 
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-import ru.hogvarts.school.model.Student;
-import ru.hogvarts.school.service.StudentService;
+import ru.hogvarts.school_3_3.model.Student;
+import ru.hogvarts.school_3_3.service.StudentService;
 
 import java.util.Collection;
 import java.util.Collections;
@@ -33,7 +33,7 @@ public class StudentController {
 
     @PutMapping("{id}")
     public ResponseEntity <Student> editStudent(@PathVariable Long id, @RequestBody Student student) {
-        Student editorialStudent = studentService.editStudent(id, student);
+        Student editorialStudent = studentService.editStudent(student);
         if (editorialStudent == null) {
             ResponseEntity.badRequest().build();
         }

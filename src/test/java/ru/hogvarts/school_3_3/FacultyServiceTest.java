@@ -2,13 +2,13 @@ package ru.hogvarts.school_3_3;
 
 import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.Test;
-import ru.hogvarts.school.model.Faculty;
-import ru.hogvarts.school.service.FacultyService;
+import ru.hogvarts.school_3_3.model.Faculty;
+import ru.hogvarts.school_3_3.service.FacultyService;
 
 import java.util.HashSet;
 import java.util.Set;
 
-import static ru.hogvarts.school.FacultyConstants.*;
+import static ru.hogvarts.school_3_3.FacultyConstants.*;
 
 public class FacultyServiceTest {
     private final FacultyService out = new FacultyService();
@@ -36,7 +36,7 @@ public class FacultyServiceTest {
         Faculty fac = new Faculty(1L, NAME2, COLOR2);
         Faculty fac2 = new Faculty(2L, NAME3, COLOR3);
         out.addFaculty(fac);
-        Faculty actual = out.editFaculty(1L, fac2);
+        Faculty actual = out.editFaculty(fac2);
         Faculty expected = new Faculty(2L, NAME3, COLOR3);
         Assertions.assertThat(actual).isEqualTo(expected);
     }

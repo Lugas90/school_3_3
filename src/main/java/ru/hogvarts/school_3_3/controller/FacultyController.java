@@ -2,8 +2,8 @@ package ru.hogvarts.school_3_3.controller;
 
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-import ru.hogvarts.school.model.Faculty;
-import ru.hogvarts.school.service.FacultyService;
+import ru.hogvarts.school_3_3.model.Faculty;
+import ru.hogvarts.school_3_3.service.FacultyService;
 
 import java.util.Collection;
 import java.util.Collections;
@@ -34,7 +34,7 @@ public class FacultyController {
 
     @PutMapping("{id}")
     public ResponseEntity <Faculty> editFaculty(@PathVariable Long id, @RequestBody Faculty faculty) {
-        Faculty editorialFaculty = facultyService.editFaculty(id, faculty);
+        Faculty editorialFaculty = facultyService.editFaculty(faculty);
         if (editorialFaculty == null) {
             return ResponseEntity.badRequest().build();
         }
@@ -42,7 +42,7 @@ public class FacultyController {
     }
 
     @DeleteMapping("{id}")
-    public ResponseEntity <Faculty> deleteFaculty(@PathVariable Long id) {
+    public ResponseEntity deleteFaculty(@PathVariable Long id) {
         facultyService.deleteFaculty(id);
         return ResponseEntity.ok().build();
     }
