@@ -11,13 +11,5 @@ import java.util.Objects;
 @Repository
 public interface FacultyRepository extends JpaRepository <Faculty, Long> {
 
-    public default Collection<Faculty> getFacultyToColor(String color) {
-        ArrayList<Faculty> result = new ArrayList<>();
-        for (Faculty faculty : findAll()) {
-            if (Objects.equals(faculty.getColor(), color)) {
-                result.add(faculty);
-            }
-        }
-        return result;
-    }
+    Collection<Faculty> findFacultyByColor(String color);
 }

@@ -32,8 +32,8 @@ public class StudentService {
         studentRepository.deleteById(id);
     }
 
-    public Collection<Student> getStudentToAge(int age) {
-        return studentRepository.getStudentToAge(age);
+    public Collection <Student> findStudentsByAge(int age) {
+        return studentRepository.findStudentsByAge(age);
     }
 
     public Collection<Student> getAll() {
