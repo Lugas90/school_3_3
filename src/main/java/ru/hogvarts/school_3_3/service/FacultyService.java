@@ -23,7 +23,10 @@ public class FacultyService {
     }
 
     public Faculty editFaculty(Faculty faculty) {
-        return facultyRepository.save(faculty);
+        if (getFaculty(faculty.getId()).equals(faculty)) {
+            return facultyRepository.save(faculty);
+        }
+        return null;
     }
 
     public void deleteFaculty(Long id) {

@@ -25,14 +25,17 @@ public class StudentService {
     }
 
     public Student editStudent(Student student) {
-        return studentRepository.save(student);
+        if (getStudent(student.getId()).equals(student)) {
+            return studentRepository.save(student);
         }
+        return null;
+    }
 
     public void deleteStudent(Long id) {
         studentRepository.deleteById(id);
     }
 
-    public Collection <Student> findStudentsByAge(int age) {
+    public Collection<Student> findStudentsByAge(int age) {
         return studentRepository.findStudentsByAge(age);
     }
 
