@@ -9,22 +9,19 @@ import java.util.*;
 @Service
 public class StudentService {
 
-    private StudentRepository studentRepository;
+    private final StudentRepository studentRepository;
 
     public StudentService(StudentRepository studentRepository) {
         this.studentRepository = studentRepository;
     }
 
-    public StudentService() {
-
-    }
 
     public Student addStudent(Student student) {
         return studentRepository.save(student);
     }
 
     public Student getStudent(Long id) {
-        return studentRepository.findById(id).get();
+        return studentRepository.findById(id).orElse(null);
     }
 
     public Student editStudent(Student student) {
