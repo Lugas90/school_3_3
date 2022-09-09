@@ -5,62 +5,38 @@ import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
+import org.mockito.Mockito;
 import org.mockito.junit.jupiter.MockitoExtension;
-import org.springframework.data.repository.cdi.Eager;
 import ru.hogvarts.school_3_3.model.Faculty;
 import ru.hogvarts.school_3_3.repository.FacultyRepository;
 import ru.hogvarts.school_3_3.service.FacultyService;
 
-import java.util.HashSet;
-import java.util.Set;
+import java.util.Optional;
 
 import static ru.hogvarts.school_3_3.FacultyConstants.*;
 
 @ExtendWith(MockitoExtension.class)
 public class FacultyServiceTest {
 
+    Faculty f1 = new Faculty(1L, NAME1, COLOR1);
+    Faculty f2 = new Faculty(2L, NAME2, COLOR2);
+    Faculty f3 = new Faculty(3L, NAME3, COLOR3);
     @Mock
-    private FacultyService facultyService;
+    private FacultyRepository facultyRepository;
 
     @InjectMocks
-    private FacultyRepository facultyRepository;
+    private FacultyService facultyService;
 
 
     @Test
     public void shouldReturnAddFaculty() {
-        Faculty fac = new Faculty(1L, NAME1, COLOR1);
-        Faculty actual = facultyService.addFaculty(fac);
-        Faculty expected = new Faculty(1L, NAME1, COLOR1);
-        Assertions.assertThat(actual).isEqualTo(expected);
+        Mockito.when(facultyRepository.save(f1)).thenReturn(f1);
+        Assertions.assertThat(facultyService.addFaculty(f1)).isEqualTo(f1);
     }
 
     @Test
     public void shouldReturnGetFaculty() {
-        Faculty fac = new Faculty(1L, NAME2, COLOR2);
-        facultyService.addFaculty(fac);
-        Faculty actual = facultyService.getFaculty(1L);
-        Faculty expected = new Faculty(1L, NAME2, COLOR2);
-        Assertions.assertThat(actual).isEqualTo(expected);
-    }
-
-    @Test
-    public void shouldReturnEditFaculty() {
-        Faculty fac = new Faculty(1L, NAME2, COLOR2);
-        Faculty fac2 = new Faculty(2L, NAME3, COLOR3);
-        facultyService.addFaculty(fac);
-        Faculty actual = facultyService.editFaculty(2L, fac2);
-        Faculty expected = new Faculty(2L, NAME3, COLOR3);
-        Assertions.assertThat(actual).isEqualTo(expected);
-    }
-
-    @Test
-    public void shouldReturnDeleteFaculty() {
-        Faculty fac = new Faculty(1L, NAME1, COLOR1);
-        Faculty fac2 = new Faculty(2L, NAME2, COLOR2);
-        facultyService.addFaculty(fac);
-        facultyService.addFaculty(fac2);
-        Set<Faculty> expected = new HashSet<>(Set.of(fac));
-        facultyService.deleteFaculty(2L);
-        Assertions.assertThat(facultyService.getAll()).isEqualTo(expected);
+        Mockito.when(facultyRepository.findById(2L)).thenReturn(Optional.ofNullable(f2));
+        Assertions.assertThat(facultyService.getFaculty(2L)).isEqualTo(f2);
     }
 }
