@@ -22,8 +22,8 @@ public class FacultyService {
         return facultyRepository.findById(id).orElse(null);
     }
 
-    public Faculty editFaculty(Faculty faculty) {
-        if (getFaculty(faculty.getId()).equals(faculty)) {
+    public Faculty editFaculty(Long id,Faculty faculty) {
+        if (getFaculty(id) != null) {
             return facultyRepository.save(faculty);
         }
         return null;

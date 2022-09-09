@@ -24,8 +24,8 @@ public class StudentService {
         return studentRepository.findById(id).orElse(null);
     }
 
-    public Student editStudent(Student student) {
-        if (getStudent(student.getId()).equals(student)) {
+    public Student editStudent(Long id, Student student) {
+        if (getStudent(id) != null) {
             return studentRepository.save(student);
         }
         return null;

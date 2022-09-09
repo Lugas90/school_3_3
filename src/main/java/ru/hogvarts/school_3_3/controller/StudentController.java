@@ -31,9 +31,9 @@ public class StudentController {
         return ResponseEntity.ok(student);
     }
 
-    @PutMapping
-    public ResponseEntity <Student> editStudent(@RequestBody Student student) {
-        Student editorialStudent = studentService.editStudent(student);
+    @PutMapping("{id}")
+    public ResponseEntity <Student> editStudent(@RequestBody Student student, @PathVariable Long id) {
+        Student editorialStudent = studentService.editStudent(id, student);
         if (editorialStudent == null) {
             ResponseEntity.badRequest().build();
         }
@@ -44,6 +44,11 @@ public class StudentController {
     public ResponseEntity deleteStudent(@PathVariable Long id) {
         studentService.deleteStudent(id);
         return ResponseEntity.ok().build();
+    }
+
+    @GetMapping("/all")
+    public ResponseEntity <Collection<Student>> getAll() {
+        return ResponseEntity.ok(studentService.getAll());
     }
 
     @GetMapping
