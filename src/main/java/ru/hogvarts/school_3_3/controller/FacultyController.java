@@ -47,10 +47,24 @@ public class FacultyController {
         return ResponseEntity.ok().build();
     }
 
+    @GetMapping("/all")
+    public ResponseEntity<Collection<Faculty>> getAll() {
+        return ResponseEntity.ok(facultyService.getAll());
+    }
+
     @GetMapping
     public ResponseEntity <Collection<Faculty>> findFacultyByColor(@RequestParam(required = false) String color) {
         if (color != null && !color.isBlank()){
             return ResponseEntity.ok(facultyService.getFacultyToColor(color));
+        }
+        return ResponseEntity.ok(Collections.emptyList());
+    }
+
+    @GetMapping("/colorOrName")
+    public ResponseEntity<Collection<Faculty>> findFacultyByColorIgnoreCaseOrNameIgnoreCase
+            (@RequestParam(required = false) String color, @RequestParam(required = false) String name) {
+        if (color != null && !color.isBlank() || name != null && !name.isBlank()) {
+            return ResponseEntity.ok(facultyService.findFacultyByColorIgnoreCaseOrNameIgnoreCase(color, name));
         }
         return ResponseEntity.ok(Collections.emptyList());
     }

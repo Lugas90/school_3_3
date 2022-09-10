@@ -1,8 +1,6 @@
 package ru.hogvarts.school_3_3.model;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
+import javax.persistence.*;
 import java.util.Objects;
 
 @Entity
@@ -13,6 +11,9 @@ public class Student {
     private long id;
     private String name;
     private int age;
+
+    @ManyToOne
+    private Faculty faculty;
 
     public Student(long id, String name, int age) {
         this.id = id;
