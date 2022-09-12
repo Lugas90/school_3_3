@@ -25,8 +25,12 @@ public class StudentService {
     }
 
     public Student editStudent(Long id, Student student) {
-        if (getStudent(id) != null) {
-            return studentRepository.save(student);
+        Optional<Student> optional = studentRepository.findById(id);
+        if (optional.isPresent()) {
+            Student fromDB = optional.get();
+            fromDB.setName(fromDB.getName());
+            fromDB.setAge(fromDB.getAge());
+            return studentRepository.save(fromDB);
         }
         return null;
     }

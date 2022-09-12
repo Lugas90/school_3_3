@@ -2,7 +2,9 @@ package ru.hogvarts.school_3_3.service;
 
 import org.springframework.stereotype.Service;
 import ru.hogvarts.school_3_3.model.Faculty;
+import ru.hogvarts.school_3_3.model.Student;
 import ru.hogvarts.school_3_3.repository.FacultyRepository;
+import ru.hogvarts.school_3_3.repository.StudentRepository;
 
 import java.util.*;
 
@@ -22,9 +24,13 @@ public class FacultyService {
         return facultyRepository.findById(id).orElse(null);
     }
 
-    public Faculty editFaculty(Long id,Faculty faculty) {
-        if (getFaculty(id) != null) {
-            return facultyRepository.save(faculty);
+    public Faculty editFaculty(Long id, Faculty faculty) {
+        Optional<Faculty> optional = facultyRepository.findById(id);
+        if (optional.isPresent()) {
+            Faculty fromDB = optional.get();
+            fromDB.setName(fromDB.getName());
+            fromDB.setColor(fromDB.getColor());
+            return facultyRepository.save(fromDB);
         }
         return null;
     }
