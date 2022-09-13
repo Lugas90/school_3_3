@@ -2,9 +2,7 @@ package ru.hogvarts.school_3_3.service;
 
 import org.springframework.stereotype.Service;
 import ru.hogvarts.school_3_3.model.Faculty;
-import ru.hogvarts.school_3_3.model.Student;
 import ru.hogvarts.school_3_3.repository.FacultyRepository;
-import ru.hogvarts.school_3_3.repository.StudentRepository;
 
 import java.util.*;
 
